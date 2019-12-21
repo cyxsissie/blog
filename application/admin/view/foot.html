@@ -1,0 +1,53 @@
+<script>
+    //强制修改密码
+    if("{:cookie('change_password')}"){
+        layer.open({
+            content: "{:url('admin/change_password/index',['layer'=>1])}"
+            ,title : "密码安全性弱，请及时修改"
+            ,type : 2
+            ,closeBtn: 0
+            ,btn: ['提交']
+            ,area: ['800px', '600px']
+            ,yes: function(index, layero){
+                var lock = false; //默认未锁定
+                var form = parent.layer.getChildFrame('form', index);
+                var d = {};
+                var t = form.serializeArray();
+                $.each(t, function () {
+                    d[this.name] = this.value;
+                });
+                var url= form.data('url');
+                if(url!==null && !lock){
+                    lock = true;
+                    //加载层
+                    layer.load(2, {shade: false}); //0代表加载的风格，支持0-2
+                    $.ajax({
+                        url:url,
+                        type:"post",
+                        data:d,
+                        dataType:'text',
+                        success:function(data){
+                            layer.closeAll('loading'); //关闭加载层
+                            data = JSON.parse(data);
+                            if(data.code==200){
+                                parent.layer.msg(data.msg,{time:1500},function(){
+                                    parent.layer.closeAll();
+                                    window.location.reload();
+                                });
+                            }else {
+                                parent.layer.msg(data.msg);
+                            }
+                        },
+                        error:function(e){
+                            layer.closeAll('loading'); //关闭加载层
+                            layer.msg('服务器错误,请联系管理员!');
+                        }
+                    });
+                }
+            }
+        });
+    }
+</script>
+</body>
+
+</html>

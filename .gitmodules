@@ -1,0 +1,6 @@
+[submodule "application/live"]
+	path = application/live
+	url = http://192.168.0.163/crmlivesystem/bryliveadmin.git
+[submodule "application/room"]
+	path = application/room
+	url = http://192.168.0.163/crmlivesystem/bryroomadmin.git

@@ -1,0 +1,85 @@
+{include file="head" /}
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row search">
+                        <form class="form-inline col-sm-12 m-b-xs" method="get">
+                            <div class="form-group">
+                                <label>推广信息：</label>
+                                <input type="text" class="form-control input-sm" name="tg_info" value="" placeholder="推广工号 / 推广姓名">
+                            </div>
+
+                            <div class="form-group">
+                                <label>安装版本：</label>
+                                <select name="install_version" class="form-control inline input-sm">
+                                    <option value="">请选择</option>
+
+                                    <option selected>23</option>
+
+                                </select>
+                            </div>
+                            <a href="{:url('article/add')}" class="btn btn-success btn-sm pull-right"><i class="fa fa-fa fa-file-excel-o"></i> 添加</a>
+
+                            <input type="hidden" name="page_num" id="page_num" value="{$Think.get.page_num}"/>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-search"></i> 搜索
+                                </button>
+                                <a href="{:url('article/index')}" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i> 刷新</a>
+                            </div>
+
+                        </form>
+                    </div>
+                    <table class="table table-striped">
+                        <tbody id="content">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>标题</th>
+                            <th>简介</th>
+                            <th>正文</th>
+                            <th>添加时间</th>
+                            <th>修改时间</th>
+                            <th>查看次数</th>
+                            <th>所属分类</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="data" item="vo"}
+                        <tr>
+                            <td>{:vo.id}</td>
+                            <td>{:vo.title}</td>
+                            <td>{:vo.profile}</td>
+                            <td>{:vo.add_time}</td>
+                            <td>{:vo.update_time}</td>
+                            <td>{:vo.count}</td>
+                            <td></td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="transfer pull-right">
+                   <div style="float: right;display: -webkit-box;">
+                       <div class="btable-paged" style="float: right;">
+                           {$data->render()}
+                       </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="__JS__/plugins/layer/laydate/laydate.js"></script>
+<script>
+
+
+</script>
+
+{include file="foot" /}
